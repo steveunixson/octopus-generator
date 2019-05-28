@@ -14,7 +14,15 @@ class Main extends Package {
 
   createDirectories() {
     if (!fs.existsSync(`${this.dir}/${this.name}`)) {
+      const rootDirs = Object.keys(template(this.structure).root);
+      const srcDirs = Object.keys(template(this.structure).root.src);
       fs.mkdirSync(`${this.dir}/${this.name}`);
+      rootDirs.forEach((item) => {
+        fs.mkdirSync(`${this.dir}/${this.name}/${item}`);
+      });
+      srcDirs.forEach((item) => {
+        fs.mkdirSync(`${this.dir}/${this.name}/src/${item}`);
+      });
     }
     return this;
   }
